@@ -1,3 +1,7 @@
+# Adobe Illustrator files
+*.ai
+*.ai:Zone.Identifier
+
 # Logs
 logs
 *.log
