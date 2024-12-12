@@ -4,59 +4,59 @@ import { unicorns } from "./unicorns.js"; // Import the unicorns array
 ///////// Fetch Unicorns //////////
 ///////////////////////////////////
 
-// TASK 1: Get unique loves from unicorns
-const getUniqueLoves = () => {
-  const allLoves = unicorns.flatMap((unicorn) => unicorn.loves);
-  return [...new Set(allLoves)]; // Return unique loves
+// TASK 1: Get unique food preferences from unicorns
+const getUniqueFoodPreferences = () => {
+  const allFoodPreferences = unicorns.flatMap((unicorn) => unicorn.loves);
+  return [...new Set(allFoodPreferences)]; // Return unique food preferences
 };
 
-// TASK 1: Setup function to populate loves list
-const setupLovesList = () => {
-  console.log("Initializing loves list...");
+// TASK 1: Setup function to populate food list
+const setupFoodList = () => {
+  console.log("Initializing food list...");
 
-  const uniqueLoves = getUniqueLoves(); // Get unique loves instead of foods
-  const lovesListContainer = $("#food-list"); // Renamed to reflect loves context
-  lovesListContainer.empty(); // Clear existing loves
+  const uniqueFoods = getUniqueFoodPreferences(); // Get unique foods
+  const foodListContainer = $("#food-list");
+  foodListContainer.empty(); // Clear existing foods
 
-  uniqueLoves.forEach((love) => {
-    const loveItemElement = $("<div></div>").text(love).addClass("food-item"); // Updated variable name
+  uniqueFoods.forEach((food) => {
+    const foodItemElement = $("<div></div>").text(food).addClass("food-item");
 
-    loveItemElement.on("click", () => {
-      fetchUnicornsByLovePreference(love); // Updated function call
-      // Highlight clicked love item
+    foodItemElement.on("click", () => {
+      fetchUnicornsByFoodPreference(food);
+      // Highlight clicked food item
       $(".food-item").removeClass("selected");
-      loveItemElement.addClass("selected");
+      foodItemElement.addClass("selected");
     });
 
-    lovesListContainer.append(loveItemElement); // Add love item to the container
+    foodListContainer.append(foodItemElement); // Add food item to the container
   });
 
-  // Add search functionality for loves
+  // Add search functionality for foods
   $("#foodSearch").on("input", (event) => {
     const searchTerm = event.target.value.toLowerCase();
-    const filteredLoves = uniqueLoves.filter((love) => // Filtering loves based on search input
-      love.toLowerCase().includes(searchTerm)
+    const filteredFoods = uniqueFoods.filter((food) =>
+      food.toLowerCase().includes(searchTerm)
     );
-    lovesListContainer.empty();
+    foodListContainer.empty();
 
-    filteredLoves.forEach((love) => {
-      const loveItemElement = $("<div></div>").text(love).addClass("food-item");
+    filteredFoods.forEach((food) => {
+      const foodItemElement = $("<div></div>").text(food).addClass("food-item");
 
-      loveItemElement.on("click", () => {
-        fetchUnicornsByLovePreference(love); // Updated function call
+      foodItemElement.on("click", () => {
+        fetchUnicornsByFoodPreference(food);
         $(".food-item").removeClass("selected");
-        loveItemElement.addClass("selected");
+        foodItemElement.addClass("selected");
       });
 
-      lovesListContainer.append(loveItemElement);
+      foodListContainer.append(foodItemElement);
     });
   });
 };
 
-// Fetch unicorns based on their loves preferences
-const fetchUnicornsByLovePreference = (selectedLove) => {
+// Fetch unicorns based on their food preferences
+const fetchUnicornsByFoodPreference = (selectedFood) => {
   const matchingUnicorns = unicorns.filter((unicorn) =>
-    unicorn.loves.includes(selectedLove)
+    unicorn.loves.includes(selectedFood)
   ); // Filter unicorns
   displayUnicornDetails(matchingUnicorns); // Display filtered unicorns
 };
@@ -72,8 +72,8 @@ const displayUnicornDetails = (matchingUnicorns) => {
 
   if (matchingUnicorns.length === 0) {
     unicornDetailsContainer.append(
-      "<p>No unicorns found for this love! 😢</p>" // Updated message
-    ); // No results message
+      "<p>No unicorns found for this food! 😢</p>" // Message for no results
+    );
     return;
   }
 
@@ -89,8 +89,8 @@ const displayUnicornDetails = (matchingUnicorns) => {
     unicornItemElement.append(`<h3>${unicorn.name}</h3>`); // Display unicorn name
     unicornItemElement.append(`<h4>Weight: ${unicorn.weight} kgs</h4>`); // Display weight
     unicornItemElement.append(
-      `<p>Favourite Loves: ${unicorn.loves.join(", ")}</p>` // Updated text to "Loves"
-    ); // Display favourite loves
+      `<p>Favourite Foods: ${unicorn.loves.join(", ")}</p>` // Display favourite foods
+    ); 
     unicornItemElement.append(`<p>Gender: ${unicorn.gender}</p>`); // Display gender
     unicornItemElement.append(`<p>Vampires: ${unicorn.vampires}</p>`); // Display vampires
     unicornItemElement.append(`<p>Vaccinated: ${unicorn.vaccinated ? "Yes" : "No"}</p>`); // Display vaccination status
@@ -147,4 +147,4 @@ const setupSorting = (matchingUnicorns) => {
 };
 
 // Initialize setup when the document is ready
-$(document).ready(setupLovesList); // Updated to call setupLovesList
+$(document).ready(setupFoodList); // Call setupFoodList
