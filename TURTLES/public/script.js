@@ -1,5 +1,15 @@
 import { turtles } from "./turtles.js"; // Import the turtles array
 
+// Function to format the date of birth
+function formatDOB(dob) {
+    const date = new Date(dob);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
 ///////////////////////////////////
 ///////// Fetch Turtles //////////
 //////////////////////////////////
@@ -87,11 +97,12 @@ const displayTurtleDetails = (matchingTurtles) => {
 
     turtleItemElement.append(turtleImageElement); // Add the photo
     turtleItemElement.append(`<h3>${turtle.name}</h3>`); // Display turtle name
-    turtleItemElement.append(`<h4>Habitat: ${turtle.habitat}</h4>`); // Display habitat
-    turtleItemElement.append(`<h4>Weight: ${turtle.weight} lbs</h4>`); // Display weight
-    turtleItemElement.append(`<p>Shell Width: ${turtle.shellWidth}</p>`); // Display shell width
+    turtleItemElement.append(`<h4>${formatDOB(turtle.dob)}</h4>`); // Display DOB
+    turtleItemElement.append(`<p>Habitat: ${turtle.habitat}</p>`); // Display habitat
+    turtleItemElement.append(`<p>Weight: ${turtle.weight} lbs</p>`); // Display weight
+    turtleItemElement.append(`<p>Shell Width: ${turtle.shellWidth} in</p>`); // Display shell width
     turtleItemElement.append(
-      `<p>Favourite Foods: ${turtle.loves.join(", ")}</p>` // Display favourite foods
+      `<p>Loves: ${turtle.loves.join(", ")}</p>` // Display favourite foods
     ); 
     turtleItemElement.append(`<p>Gender: ${turtle.gender}</p>`); // Display gender
     turtleItemElement.append(`<p>Migration Distance: ${turtle.kilometresMigrated} km</p>`); // Display migration distance
