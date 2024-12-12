@@ -21,7 +21,7 @@ const setupFoodList = () => {
     uniqueFoods.forEach((food) => {
         const foodItemElement = $("<div></div>")
             .text(food)
-            .addClass("food-item"); // Create a new div for each food
+            .addClass("food-item");
 
         foodItemElement.on("click", () => {
             fetchUnicornsByFoodPreference(food);
@@ -35,9 +35,9 @@ const setupFoodList = () => {
 
     // Add search functionality
     $("#foodSearch").on("input", (event) => {
-        const searchTerm = event.target.value.toLowerCase(); // Get user search term
-        const filteredFoods = uniqueFoods.filter(food => food.toLowerCase().includes(searchTerm)); // Filter foods
-        foodListContainer.empty(); // Clear existing food items
+        const searchTerm = event.target.value.toLowerCase();
+        const filteredFoods = uniqueFoods.filter(food => food.toLowerCase().includes(searchTerm));
+        foodListContainer.empty();
 
         filteredFoods.forEach((food) => {
             const foodItemElement = $("<div></div>")
@@ -83,21 +83,13 @@ const displayUnicornDetails = (matchingUnicorns) => {
         return;
     }
 
-    // Sort unicorns based on user preference
-    const selectedSortOption = $('#sort-select').val(); // Get selected sort option
-    if (selectedSortOption === 'weight') {
-        matchingUnicorns.sort((firstUnicorn, secondUnicorn) => firstUnicorn.weight - secondUnicorn.weight); // Sort by weight
-    } else {
-        matchingUnicorns.sort((firstUnicorn, secondUnicorn) => firstUnicorn.name.localeCompare(secondUnicorn.name)); // Sort by name
-    }
-
     // Display unicorn details
     matchingUnicorns.forEach((unicorn) => {
-        const unicornItemElement = $("<div></div>").addClass("unicorn-item"); // New unicorn item class
+        const unicornItemElement = $("<div></div>").addClass("unicorn-item");
         const unicornImageElement = $("<img>")
             .attr("src", `imgs/${unicorn.name}.svg`)
             .attr("alt", `${unicorn.name}'s photo`)
-            .addClass("unicorn-img"); // Image styling
+            .addClass("unicorn-img");
 
         unicornItemElement.append(unicornImageElement); // Add the photo
         unicornItemElement.append(`<h3>${unicorn.name}</h3>`); // Display unicorn name
@@ -105,7 +97,28 @@ const displayUnicornDetails = (matchingUnicorns) => {
         unicornItemElement.append(`<p>Favourite Foods: ${unicorn.loves.join(", ")}</p>`); // Display favourite foods
         unicornDetailsContainer.append(unicornItemElement); // Add unicorn to its container
     });
+
+    // Call sorting function here after displaying unicorns
+    setupSorting(matchingUnicorns); // Set up sorting for the displayed unicorns
+};
+
+// Setup sorting functionality
+const setupSorting = (matchingUnicorns) => {
+    $('#sort-select').off('change').on('change', function() {
+        console.log("Sort option changed!"); // Check if this logs when the dropdown changes
+        const selectedSortOption = $(this).val();
+        console.log("Selected sort option:", selectedSortOption); // Log the selected option
+
+        if (selectedSortOption === 'weight') {
+            matchingUnicorns.sort((firstUnicorn, secondUnicorn) => firstUnicorn.weight - secondUnicorn.weight);
+        } else {
+            matchingUnicorns.sort((firstUnicorn, secondUnicorn) => firstUnicorn.name.localeCompare(secondUnicorn.name));
+        }
+        displayUnicornDetails(matchingUnicorns); // Update displayed unicorns
+    });
 };
 
 // Initialize setup when the document is ready
 $(document).ready(setupFoodList);
+
+console.log('jQuery version:', $.fn.jquery); // Should print the jQuery version
