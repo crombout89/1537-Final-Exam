@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turtle Database</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Link to CSS styles -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include jQuery -->
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <h1>Turtle Database</h1>
+    </header>
+
+    <!-- Search Section -->
+    <section id="search-section">
+      <label for="foodSearch">Search Foods:</label>
+      <input type="text" id="foodSearch" placeholder="Search for foods..." />
+      <!-- Input for searching foods -->
+    </section>
+
+    <!-- Sort Section -->
+    <section id="sort-section">
+      <label for="sort-select">Sort Turtles By:</label>
+      <select id="sort-select">
+        <option value="name">Name</option>
+        <option value="weight">Weight</option>
+        <option value="gender">Gender</option>
+        <option value="migration">Migrated Distance</option>
+        <option value="endangered">Endangered Status</option>
+        <option value="loves">Loves</option>
+      </select>
+      <!-- Dropdown for sorting options -->
+    </section>
+
+    <!-- Available Foods Section -->
+    <section id="food-list-section">
+      <h3>Available Foods</h3>
+      <div id="food-list"></div>
+      <!-- Container for food items -->
+    </section>
+
+    <!-- Turtle Details Section -->
+    <section id="turtle-details-section">
+      <h3>Turtle Details</h3>
+      <div id="turtle-details"></div>
+      <!-- Container for turtle details -->
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <p>Explore the magical world of turtles!</p>
+    </footer>
+
+    <!-- JavaScript References -->
+    <script src="turtles.js" type="module"></script>
+    <!-- Import unicorn data -->
+    <script src="script.js" type="module"></script>
+    <!-- Link to main JavaScript file -->
+  </body>
+</html>

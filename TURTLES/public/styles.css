@@ -1,0 +1,21 @@
+
+/* Turtles Details Container */
+#turtle-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+
+/* Turtle Card Item */
+.turtle-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    text-align: center;
+}
+
+.turtle-item img {
+    height: 300px;
+}
